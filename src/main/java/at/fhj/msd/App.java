@@ -14,6 +14,10 @@ public class App {
         String filename = "src/main/resources/data.txt";
         ArrayList<String> ValidList = read(filename);
         System.out.println(ValidList);
+        System.out.println("");
+        Schedule schedule = new Schedule("MSD25", "Alle", "Programmierung 2", "heute", "morgen", "Harald Schwab", "Graz");
+        System.out.println(schedule.asSql());
+
 
     }
 
