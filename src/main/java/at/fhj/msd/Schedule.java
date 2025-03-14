@@ -33,4 +33,8 @@ public class Schedule {
         this.lecture, this.starts, this.ends, this.lecturer, this.place);
     }
 
+    public String asCsv(String delimiter) {
+        return String.join(delimiter, this.cohort, this.group, this.lecture, this.starts, this.ends, this.lecturer, this.place);
+    }
+
 }
