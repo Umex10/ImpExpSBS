@@ -15,14 +15,12 @@ public class App {
 
     public static void main(String[] args) {
 
-        /*      String filename = "src/main/resources/data.txt";
-        ArrayList<String> ValidList = read(filename);
-        System.out.println(ValidList);
-
-        System.out.println("");*/
-        List<Schedule> schedules = readData("data.txt");
-
-        writeData(schedules, "csv");
+        //? Read file with static method
+        //List<Schedule> schedules = readData("data.txt");
+        //? Read file with class DataReader
+        DataReader reader = new DataReader("data.txt");
+        List<Schedule> schedules = reader.read();
+        writeData(schedules, "sql");
 
     }
 
@@ -87,13 +85,11 @@ public class App {
         }
 
         try {
-            Files.writeString(Paths.get("data."  + type), String.join("\n", lines.toArray(new String[0]))); //Give empty Array as parameter! The Method should specify the length by itself
+            Files.writeString(Paths.get("data." + type), String.join("\n", lines.toArray(new String[0]))); //Give empty Array as parameter! The Method should specify the length by itself
             //The new file will result in root folder. 
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-
-
 
 }

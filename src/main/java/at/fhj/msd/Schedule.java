@@ -27,10 +27,9 @@ public class Schedule {
         this.place = place;
     }
 
-
     public String asSql() {
         return String.format("INSERT INTO schedules VALUES ('%s','%s','%s','%s','%s','%s','%s');", this.cohort, this.group,
-        this.lecture, this.starts, this.ends, this.lecturer, this.place);
+                this.lecture, this.starts, this.ends, this.lecturer, this.place);
     }
 
     public String asCsv(String delimiter) {
