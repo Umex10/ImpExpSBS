@@ -1,10 +1,5 @@
 package at.fhj.msd;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,27 +17,6 @@ public class App {
         List<Schedule> schedules = reader.read();
         writeData(schedules, "sql");
 
-    }
-
-    public static ArrayList<String> read(String filename) {
-
-        ArrayList<String> ValidList = new ArrayList<>();
-        File file = new File(filename);
-
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-
-            String line;
-            while ((line = br.readLine()) != null) {
-                ValidList.add(line);
-            }
-
-        } catch (FileNotFoundException e) {
-            System.out.printf("File '%s' was not found", file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return ValidList;
     }
 
     public static List<Schedule> readData(String file) {
