@@ -17,6 +17,10 @@ public class App {
         List<Schedule> schedules = reader.read();
         writeData(schedules, "sql");
 
+        //? Write to file with class DataWriter
+        DataWriter writer = new DataWriter("data", schedules);
+        writer.writeSql();
+
     }
 
     public static List<Schedule> readData(String file) {
