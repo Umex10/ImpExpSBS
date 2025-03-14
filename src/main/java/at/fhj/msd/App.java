@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class App {
 
@@ -14,16 +18,13 @@ public class App {
         String filename = "src/main/resources/data.txt";
         ArrayList<String> ValidList = read(filename);
         System.out.println(ValidList);
-       
-        Schedule schedule = new Schedule("MSD25", "Alle", "Programmierung 2", "heute", "morgen", "Harald Schwab", "Graz");
-        
-        System.out.println(schedule.asSql()); //?Test on asSql() method
-        
-        System.out.println(schedule.asCsv(","));
-        System.out.println(schedule.asCsv(";"));   //? Test on asCsv() method
-        System.out.println(schedule.asCsv("|"));
-    
 
+        System.out.println("");
+
+        List<Schedule> schedules = readData("data.txt");
+        for (Schedule schedule: schedules) {
+            System.out.println(schedule.asCsv(","));
+        }
 
     }
 
@@ -47,6 +48,23 @@ public class App {
 
         return ValidList;
 
+    }
+
+    public static List<Schedule> readData(String file) {
+        List<Schedule> schedules = new ArrayList<>();
+        try {
+        
+            Path filePath = Paths.get(App.class.getClassLoader().getResource(file).toURI());
+            List<String> lines = Files.readAllLines(filePath);
+            for(String line: lines) {
+                String[] parts = line.split(";");
+                Schedule schedule = new Schedule(parts[6], parts[2], parts[1], parts[3], parts[4], parts[7], parts[5]);
+                schedules.add(schedule);
+            }     
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return schedules;
     }
 
 }
