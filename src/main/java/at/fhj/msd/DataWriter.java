@@ -23,12 +23,7 @@ public class DataWriter {
         for(Schedule schedule: this.schedules) {
             lines.add(schedule.asSql());
         }
-        try {
-            Files.writeString(Paths.get(this.fileName + ".sql"), String.join("\n", lines.toArray(new String[0])));
-            
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        this.write(lines, "sql");
     }
 
     public void writeCsv() {
@@ -37,12 +32,7 @@ public class DataWriter {
             lines.add(schedule.asCsv(","));
         }
 
-        try {
-            Files.writeString(Paths.get(this.fileName + ".csv"), String.join("\n", lines.toArray(new String[0])));
-            
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+       this.write(lines, "csv");
     }
 
     public void writeTsv() {
@@ -51,11 +41,14 @@ public class DataWriter {
           lines.add(schedule.asCsv("\t"));
         }
     
-        try {
-          Files.writeString(Paths.get(this.fileName + ".tsv"), String.join("\n", lines.toArray(new String[0])));
-        } catch (Exception e) {
-          System.out.println(e);
-        }
+        this.write(lines, "tsv");
       }
     
+      private void write(List<String> lines, String fileExtension) {
+        try {
+            Files.writeString(Paths.get(this.fileName + "." + fileExtension), String.join("\n", lines.toArray(new String[0])));
+          } catch (Exception e) {
+            System.out.println(e);
+          }
+      }
 }

@@ -18,7 +18,7 @@ public class App {
         writeData(schedules, "sql");
 
         //? Write to file with class DataWriter
-        DataWriter writer = new DataWriter("data", schedules);
+        DataWriter writer = new DataWriter("data1", schedules);
         writer.writeSql();
 
     }
